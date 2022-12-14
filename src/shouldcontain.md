@@ -1,0 +1,1 @@
+ Should contain template helper code

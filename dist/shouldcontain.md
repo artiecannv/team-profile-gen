@@ -1,0 +1,1 @@
+ Should contain rendered output (HMTL and CSS Style Sheet)
