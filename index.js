@@ -10,6 +10,38 @@ const Intern = require('./lib/Intern');
 //Create Empty Array of Team Members
 const teamMembers = [];
 
+
+function addTeamMember() {
+    inquirer.prompt(
+        {
+            message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
+            type: "list",
+            name: "menuChoice",
+            choices: [
+              {
+                name: "Add an" + chalk.bold.yellow("ENGINEER") + "to the team",
+              },
+              {
+                name: "Add an" + chalk.bold.green("INTERN") + "to the team",
+              },
+              {
+                name: "I'm finished building my team!",
+              },
+            ],
+        }, 
+    )
+    .then((answer) => {
+        if (answer.menuChoice === 'Engineer') {
+            addEngineer();
+        } else if (answer.menuChoice === 'Intern') {
+            addIntern();
+        } else {
+            createTeamPage();
+        }
+    });
+}
+
+
 // Manager Questions to start building the team
 const managerQuestions = [
   {
@@ -45,27 +77,7 @@ inquirer.prompt(managerQuestions).then((answers) => {
     teamMembers.push(newManager);
 });
 
-const menu = [
-    {
-        message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
-        type: "list",
-        name: "menuChoice",
-        choices: [
-          {
-            name: "Add an" + chalk.bold.yellow("ENGINEER") + "to the team",
-          },
-          {
-            name: "Add an" + chalk.bold.green("INTERN") + "to the team",
-          },
-          {
-            name: "I'm finished building my team!",
-          },
-        ],
-      },
-]
-
 // Questions for the Engineer Class
-
 const engineerQuestions = [
   {
     message: "What is the name of this" + chalk.bold.yellow("ENGINEER") + "?",
@@ -87,26 +99,9 @@ const engineerQuestions = [
     type: "input",
     name: engineerGithubInput,
   },
-  {
-    message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
-    type: "list",
-    name: "menu",
-    choices: [
-      {
-        name: "Add another" + chalk.bold.yellow("ENGINEER") + "to the team?",
-      },
-      {
-        name: "Add an" + chalk.bold.green("INTERN") + "to the team?",
-      },
-      {
-        name: "I'm finished building my team!",
-      },
-    ],
-  },
 ];
 
 // Questions for the Intern Class
-
 const internQuestions = [
     {
       message: "What is the name of this" + chalk.bold.green("INTERN") + "?",
@@ -128,21 +123,38 @@ const internQuestions = [
       type: "input",
       name: internschoolInput,
     },
-    {
-      message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
-      type: "list",
-      name: "menu",
-      choices: [
-        {
-          name: "Add another" + chalk.bold.yellow("ENGINEER") + "to the team?",
-        },
-        {
-          name: "Add an" + chalk.bold.green("INTERN") + "to the team?",
-        },
-        {
-          name: "I'm finished building my team!",
-        },
-      ],
-    },
   ];
   
+
+  function addEngineer() {
+    inquirer.prompt(engineerQuestions)
+    .then((answers) => {
+        const newEngineer = new Engineer(
+            answers.engineerNameInput,
+            answers.engineerIdInput,
+            answers.engineerEmailInput,
+            answers.engineerGithubInput,
+        )
+    })
+    teamMembers.push(newEngineer);
+    addTeamMember();
+  };
+
+  function addIntern() {
+    inquirer.prompt(internQuestions)
+    .then((answers) => {
+        const newIntern = new Intern(
+            answers.internNameInput,
+            answers.internIdInput,
+            answers.internEmailInput,
+            answers.internGithubInput,
+        )
+    })
+    teamMembers.push(newIntern);
+    addTeamMember();
+  };
+
+  function createTeamPage() {
+    fs.writeFile("team-landing-page.html", generateHTML(teamMembers), (err) =>
+    err ? console.log(err) : console.log("Team Landing Page Successfully Created!"))
+  };
