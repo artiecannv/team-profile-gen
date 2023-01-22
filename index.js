@@ -1,11 +1,17 @@
+//Import NPM packages
 const inquirer = require("inquirer");
+const fs = require('fs');
 
-// engineer questions
-// intern questions
-// some kind of menu asking the user what they want to do next
+//Import Classes from Library folder
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+//Create Empty Array of Team Members
+const teamMembers = [];
 
 // Manager Questions to start building the team
-const verifyQuestions = [
+const managerQuestions = [
   {
     message: "What is your Manager's Name?",
     type: "input",
@@ -26,28 +32,37 @@ const verifyQuestions = [
     type: "input",
     name: "managerNumberInput",
   },
-  {
-    message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
-    type: "list",
-    choices: [
-      {
-        name: "Add an" + chalk.bold.yellow("ENGINEER") + "to the team",
-      },
-      {
-        name: "Add an" + chalk.bold.green("INTERN") + "to the team",
-      },
-      {
-        name: "I'm finished building my team!",
-      },
-    ],
-  },
+ 
 ];
 
-// inquirer.prompt(verifyQuestions).then((answers) => {
-//     const newManager = new Manager(
-//         answers.managerNameInput,
-//     )
-// })
+inquirer.prompt(managerQuestions).then((answers) => {
+    const newManager = new Manager(
+        answers.managerNameInput,
+        answers.managerIdInput,
+        answers.managerEmailInput,
+        answers.managerNumberInput,
+    )
+    teamMembers.push(newManager);
+});
+
+const menu = [
+    {
+        message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
+        type: "list",
+        name: "menuChoice",
+        choices: [
+          {
+            name: "Add an" + chalk.bold.yellow("ENGINEER") + "to the team",
+          },
+          {
+            name: "Add an" + chalk.bold.green("INTERN") + "to the team",
+          },
+          {
+            name: "I'm finished building my team!",
+          },
+        ],
+      },
+]
 
 // Questions for the Engineer Class
 
