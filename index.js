@@ -1,33 +1,43 @@
 const inquirer = require("inquirer");
 
-// manager questions
+
 // engineer questions
 // intern questions
 // some kind of menu asking the user what they want to do next
 
-const initialQuestions = [
+
+// Manager Questions to start building the team
+const managerQuestions = [
     {
     message: "What is your Manager's Name?",
     type: "input",
-    name: "managerName"
+    name: "managerNameInput"
     },
     {
         message: "What is your Manager's Employee ID?",
         type: "input",
-        name: "managerId"
+        name: "managerIdInput"
     },
     {
         message: "What is your Manager's Email?",
         type: "input",
-        name: "managerEmail"
+        name: "managerEmailInput"
     },
     {
         message: "What is your Manager's Office Number?",
         type: "input",
-        name: "managerNumber"
+        name: "managerNumberInput"
     },
 ];
 
-inquirer.prompt(initialQuestions).then((answers) => {
-    // do stuff with the answers then do the next thing
+inquirer.prompt(managerQuestions).then((answers) => {
+    const newManager = new Manager()
 })
+
+// Questions after getting the manager
+
+const teamQuestions = [
+    {
+
+    }
+]
