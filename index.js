@@ -10,19 +10,20 @@ const Intern = require('./lib/Intern');
 //Create Empty Array of Team Members
 const teamMembers = [];
 
+const generateHTML = require('./src/generateHTML');
 
 function addTeamMember() {
     inquirer.prompt([
         {
-            message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
+            message: ("---------Menu--------- \nChoose one of the following options:"),
             type: "list",
             name: "menuChoice",
             choices: [
               {
-                name: "Add an" + chalk.bold.yellow("ENGINEER") + "to the team",
+                name: "Add an ENGINEER to the team",
               },
               {
-                name: "Add an" + chalk.bold.green("INTERN") + "to the team",
+                name: "Add an INTERN to the team",
               },
               {
                 name: "I'm finished building my team!",
@@ -78,50 +79,50 @@ inquirer.prompt(managerQuestions).then((answers) => {
 });
 
 // Questions for the Engineer Class
-// const engineerQuestions = [
-//   {
-//     message: "What is the name of this" + chalk.bold.yellow("ENGINEER") + "?",
-//     type: "input",
-//     name: engineerNameInput,
-//   },
-//   {
-//     message: chalk.bold.yellow("ENGINEER") + "Employee ID:",
-//     type: "input",
-//     name: engineerIdInput,
-//   },
-//   {
-//     message: chalk.bold.yellow("ENGINEER") + "email address:",
-//     type: "input",
-//     name: engineerEmailInput,
-//   },
-//   {
-//     message: chalk.bold.yellow("ENGINEER") + "GitHub username:",
-//     type: "input",
-//     name: engineerGithubInput,
-//   },
-// ];
+const engineerQuestions = [
+  {
+    message: "What is the name of this ENGINEER?",
+    type: "input",
+    name: "engineerNameInput",
+  },
+  {
+    message: "ENGINEER Employee ID:",
+    type: "input",
+    name: "engineerIdInput",
+  },
+  {
+    message: "ENGINEER email address:",
+    type: "input",
+    name: "engineerEmailInput",
+  }, 
+  {
+    message: "ENGINEER GitHub username:",
+    type: "input",
+    name: "engineerGithubInput",
+  },
+];
 
 // Questions for the Intern Class
 const internQuestions = [
   {
-    message: "What is the name of this" + chalk.bold.green("INTERN") + "?",
+    message: "What is the name of this INTERN?",
     type: "input",
-    name: internNameInput,
+    name: "internNameInput",
   },
   {
-    message: chalk.bold.green("INTERN") + "Employee ID:",
+    message: "INTERN Employee ID:",
     type: "input",
-    name: internIdInput,
+    name: "internIdInput",
   },
   {
-    message: chalk.bold.green("INTERN") + "email address:",
+    message: "INTERN email address:",
     type: "input",
-    name: internEmailInput,
+    name: "internEmailInput",
   },
   {
-    message: "What school does this" + chalk.bold.green("INTERN") + "attend?",
+    message: "What school does this INTERN attend?",
     type: "input",
-    name: internSchoolInput,
+    name: "internSchoolInput",
   },
 ];
   

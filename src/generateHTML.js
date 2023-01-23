@@ -1,5 +1,6 @@
 //Create the different team cards, based on the user inputs given
 const renderTeam = (team) => {
+  return 'test'
     const renderManager = (manager) => `
     
     
@@ -32,8 +33,9 @@ function generateHTML(data) {
     </html>`;
 }
 
-//Adds cards to the base HTML page
+// //Adds cards to the base HTML page
 function appendHTML(data) {
+  return 'test'
   for (let i = 0; i < array.length; i++) {
     const element = array[i];
   }
