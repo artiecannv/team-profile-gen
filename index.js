@@ -12,7 +12,7 @@ const teamMembers = [];
 
 
 function addTeamMember() {
-    inquirer.prompt(
+    inquirer.prompt([
         {
             message: chalk.orange("---------Menu--------- \nChoose one of the following options:"),
             type: "list",
@@ -29,7 +29,7 @@ function addTeamMember() {
               },
             ],
         }, 
-    )
+      ])
     .then((answer) => {
         if (answer.menuChoice === 'Engineer') {
             addEngineer();
@@ -64,7 +64,6 @@ const managerQuestions = [
     type: "input",
     name: "managerNumberInput",
   },
- 
 ];
 
 inquirer.prompt(managerQuestions).then((answers) => {
@@ -75,55 +74,56 @@ inquirer.prompt(managerQuestions).then((answers) => {
         answers.managerNumberInput,
     )
     teamMembers.push(newManager);
+    addTeamMember();
 });
 
 // Questions for the Engineer Class
-const engineerQuestions = [
-  {
-    message: "What is the name of this" + chalk.bold.yellow("ENGINEER") + "?",
-    type: "input",
-    name: engineerNameInput,
-  },
-  {
-    message: chalk.bold.yellow("ENGINEER") + "Employee ID:",
-    type: "input",
-    name: engineerIdInput,
-  },
-  {
-    message: chalk.bold.yellow("ENGINEER") + "email address:",
-    type: "input",
-    name: engineerEmailInput,
-  },
-  {
-    message: chalk.bold.yellow("ENGINEER") + "GitHub username:",
-    type: "input",
-    name: engineerGithubInput,
-  },
-];
+// const engineerQuestions = [
+//   {
+//     message: "What is the name of this" + chalk.bold.yellow("ENGINEER") + "?",
+//     type: "input",
+//     name: engineerNameInput,
+//   },
+//   {
+//     message: chalk.bold.yellow("ENGINEER") + "Employee ID:",
+//     type: "input",
+//     name: engineerIdInput,
+//   },
+//   {
+//     message: chalk.bold.yellow("ENGINEER") + "email address:",
+//     type: "input",
+//     name: engineerEmailInput,
+//   },
+//   {
+//     message: chalk.bold.yellow("ENGINEER") + "GitHub username:",
+//     type: "input",
+//     name: engineerGithubInput,
+//   },
+// ];
 
 // Questions for the Intern Class
 const internQuestions = [
-    {
-      message: "What is the name of this" + chalk.bold.green("INTERN") + "?",
-      type: "input",
-      name: internNameInput,
-    },
-    {
-      message: chalk.bold.green("INTERN") + "Employee ID:",
-      type: "input",
-      name: internIdInput,
-    },
-    {
-      message: chalk.bold.green("INTERN") + "email address:",
-      type: "input",
-      name: internEmailInput,
-    },
-    {
-      message: "What school does this" + chalk.bold.green("INTERN") + "attend?",
-      type: "input",
-      name: internschoolInput,
-    },
-  ];
+  {
+    message: "What is the name of this" + chalk.bold.green("INTERN") + "?",
+    type: "input",
+    name: internNameInput,
+  },
+  {
+    message: chalk.bold.green("INTERN") + "Employee ID:",
+    type: "input",
+    name: internIdInput,
+  },
+  {
+    message: chalk.bold.green("INTERN") + "email address:",
+    type: "input",
+    name: internEmailInput,
+  },
+  {
+    message: "What school does this" + chalk.bold.green("INTERN") + "attend?",
+    type: "input",
+    name: internSchoolInput,
+  },
+];
   
 
   function addEngineer() {
@@ -135,8 +135,8 @@ const internQuestions = [
             answers.engineerEmailInput,
             answers.engineerGithubInput,
         )
+        teamMembers.push(newEngineer);
     })
-    teamMembers.push(newEngineer);
     addTeamMember();
   };
 
@@ -147,10 +147,10 @@ const internQuestions = [
             answers.internNameInput,
             answers.internIdInput,
             answers.internEmailInput,
-            answers.internGithubInput,
+            answers.internSchoolInput,
         )
+        teamMembers.push(newIntern);
     })
-    teamMembers.push(newIntern);
     addTeamMember();
   };
 
