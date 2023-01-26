@@ -1,17 +1,3 @@
-//Create the different team cards, based on the user inputs given
-const renderTeam = (team) => {
-  return 'test'
-    const renderManager = (manager) => `
-    
-    
-    `
-}
-
-
-
-
-
-
 function generateHTML(data) {
   return `<!DOCTYPE html>
     <html lang="en">
@@ -25,20 +11,56 @@ function generateHTML(data) {
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">Meet the team!</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
             </div>
     </div>
+    <div class="row">
         ${appendHTML(data)}
+    </div>
     </body>
     </html>`;
 }
 
 // //Adds cards to the base HTML page
 function appendHTML(data) {
-  return 'test'
-  for (let i = 0; i < array.length; i++) {
-    const element = array[i];
+  const array = [];
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i].getRole());
+    if (data[i].getRole() === 'Manager') {
+      array.push(`
+      <div class="card col-3">
+      <div class="card-body">
+        <h5 class="card-title">Manager</h5>
+        <p class="card-text">${data[i].name}</p>
+        <p class="card-text">ID: ${data[i].id}</p>
+        <p class="card-text"><a href="mailto:${data[i].email}">Email Me</a></p>
+        <p class="card-text">Office Number:${data[i].managerNumberInput}</p>
+      </div>
+    </div>`)
+    } else if (data[i].getRole() === 'Engineer') {
+      array.push(`
+      <div class="card col-3">
+      <div class="card-body">
+        <h5 class="card-title">Engineer</h5>
+        <p class="card-text">${data[i].name}</p>
+        <p class="card-text">ID: ${data[i].id}</p>
+        <p class="card-text"><a href="mailto:${data[i].email}">Email Me</a></p>
+        <a href="https://github.com/${data[i].gitHub}" class="btn btn-primary">GitHub Profile</a>
+      </div>
+    </div>`)
+    } else {
+      array.push(`
+      <div class="card col-3">
+      <div class="card-body">
+        <h5 class="card-title">Intern</h5>
+        <p class="card-text">${data[i].name}</p>
+        <p class="card-text">ID: ${data[i].id}</p>
+        <p class="card-text"><a href="mailto:${data[i].email}">Email Me</a></p>
+        <p class="card-text">School: ${data[i].school}</p>
+      </div>
+    </div>`)
+    }
   }
-}
+  return array;
+};
 
 module.exports = generateHTML;

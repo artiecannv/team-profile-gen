@@ -18,23 +18,13 @@ function addTeamMember() {
             message: ("---------Menu--------- \nChoose one of the following options:"),
             type: "list",
             name: "menuChoice",
-            choices: [
-              {
-                name: "Add an ENGINEER to the team",
-              },
-              {
-                name: "Add an INTERN to the team",
-              },
-              {
-                name: "I'm finished building my team!",
-              },
-            ],
+            choices: ["Add an ENGINEER to the team", "Add an INTERN to the team", "I'm finished building my team!"],
         }, 
       ])
     .then((answer) => {
-        if (answer.menuChoice === 'Engineer') {
+        if (answer.menuChoice === "Add an ENGINEER to the team") {
             addEngineer();
-        } else if (answer.menuChoice === 'Intern') {
+        } else if (answer.menuChoice === "Add an INTERN to the team") {
             addIntern();
         } else {
             createTeamPage();
@@ -96,7 +86,7 @@ const engineerQuestions = [
     name: "engineerEmailInput",
   }, 
   {
-    message: "ENGINEER GitHub username:",
+    message: "ENGINEER GitHub Username:",
     type: "input",
     name: "engineerGithubInput",
   },
@@ -137,8 +127,9 @@ const internQuestions = [
             answers.engineerGithubInput,
         )
         teamMembers.push(newEngineer);
+        addTeamMember();
     })
-    addTeamMember();
+    
   };
 
   function addIntern() {
@@ -151,11 +142,11 @@ const internQuestions = [
             answers.internSchoolInput,
         )
         teamMembers.push(newIntern);
+        addTeamMember();
     })
-    addTeamMember();
   };
 
   function createTeamPage() {
-    fs.writeFile("team-landing-page.html", generateHTML(teamMembers), (err) =>
+    fs.writeFile("./dist/team-landing-page.html", generateHTML(teamMembers), (err) =>
     err ? console.log(err) : console.log("Team Landing Page Successfully Created!"))
   };
